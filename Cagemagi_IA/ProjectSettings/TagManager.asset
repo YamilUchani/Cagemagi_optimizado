@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Pasto
   - Enemigo
+  - Vacio
+  - Torre
+  - Limite
+  - Mana
+  - Absorcion
   layers:
   - Default
   - TransparentFX
@@ -13,7 +18,7 @@ TagManager:
   - Pasto
   - Water
   - UI
-  - 
+  - IgnoreTouch
   - 
   - 
   - 

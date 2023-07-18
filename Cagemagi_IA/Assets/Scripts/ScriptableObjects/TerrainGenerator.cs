@@ -5,31 +5,66 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Generator/TerrainGenerator")]
 public class TerrainGenerator : ScriptableObject
 {
+public int manaCount;
+private GameObject terrainContainer;
 public GameObject cubePrefab; // Arrastra un prefab de cubo a este campo en el Inspector
-public int gridWidth = 7;
-public int gridHeight = 16;
-public float spacing = 1.0f;
-public float probability = 0.8f; // Variable para controlar la probabilidad de generación de un bloque
-public void GenerateGrid(Vector3 position)
+public Material voidMaterial;
+public Material pastoMaterial;
+public UIMana UImana;
+public string terrainTag;
+public int gridWidth = 18;
+public int gridHeight = 9;
+public int life;
+private float spacing = 1f;
+public float probability; // Variable para controlar la probabilidad de generación de un bloque
+
+public void GenerateGrid()
 {
-    if (cubePrefab == null)
+    if (terrainContainer == null) // Comprueba si el contenedor ya existe
     {
-        Debug.LogError("Cannot instantiate a null object!");
-        return;
+        terrainContainer = new GameObject("TerrainContainer");
     }
     // Calcula la posición inicial
-    Vector3 startPos = position;
+    Vector3 startPos = new Vector3(0,0,0);
 
     // Genera la cuadrícula
-    for (int x = 0; x < gridWidth; x++)
+    for (int y = 0; y < gridWidth; y++)
     {
-        for (int y = 0; y < gridHeight; y++)
+        for (int x = 0; x < gridHeight; x++)
         {
             Vector3 pos = startPos + Vector3.right * x * spacing - Vector3.forward * y * spacing;
             float randomValue = Random.value; // Obtiene un valor aleatorio entre 0 y 1
             if (randomValue > probability) // Si el valor aleatorio es mayor a la probabilidad establecida
             {
-                Instantiate(cubePrefab, pos, Quaternion.identity);
+                
+                GameObject spawnedTerrain = Instantiate(cubePrefab, pos, Quaternion.identity);
+                spawnedTerrain.transform.SetParent(terrainContainer.transform);
+                spawnedTerrain.tag = terrainTag;
+                var lifeComponent = spawnedTerrain.AddComponent<TerrainLife>();
+                var manaComponent = spawnedTerrain.AddComponent<TerrainMana>();
+                lifeComponent.life = life;
+                lifeComponent.voidMaterial = voidMaterial;
+                lifeComponent.terrainTag = terrainTag;
+                lifeComponent.pastoMaterial = pastoMaterial;
+                lifeComponent.manaCount = manaCount;
+                manaComponent.manaCount = manaCount;
+
+            }
+            else
+            {
+                GameObject spawnedTerrain = Instantiate(cubePrefab, pos, Quaternion.identity);
+                spawnedTerrain.transform.SetParent(terrainContainer.transform);
+                Renderer renderer = spawnedTerrain.GetComponent<Renderer>();
+                var createComponent = spawnedTerrain.AddComponent<TerrainCreate>();
+                Collider collider = spawnedTerrain.GetComponent<Collider>();
+                collider.isTrigger = true;
+                createComponent.terrainTag = terrainTag;
+                renderer.material = voidMaterial;
+                createComponent.pastoMaterial = pastoMaterial;
+                createComponent.life = life; 
+                createComponent.voidMaterial = voidMaterial; 
+                createComponent.manaCount = manaCount;
+                spawnedTerrain.tag = "Vacio";
             }
         }
     }

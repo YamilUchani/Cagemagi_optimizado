@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f118b9a8246cabea164b6832e120b4, type: 3}
   m_Name: Pasto
   m_EditorClassIdentifier: 
+  manaCount: 2
   cubePrefab: {fileID: 3100968332963910930, guid: 459fdeec9567297e28edfd747f0f6691, type: 3}
-  gridWidth: 16
-  gridHeight: 7
-  spacing: 1
+  voidMaterial: {fileID: 2100000, guid: 4ff0409a3abb98540abb02c28249e87b, type: 2}
+  pastoMaterial: {fileID: 2100000, guid: 86123da94fd0a1514b9bd57a39085987, type: 2}
+  UImana: {fileID: 0}
+  terrainTag: Pasto
+  gridWidth: 18
+  gridHeight: 9
+  life: 20
+  probability: 0.5
