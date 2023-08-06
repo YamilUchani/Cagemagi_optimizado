@@ -7,13 +7,13 @@ public class UICost : MonoBehaviour
 {
     public Button myButton;
     public GameObject UImana;
-    public int valorLimite = 18;
+    public int valorLimite;
 
     private void Update()
     {
         UIMana mana = UImana.GetComponent<UIMana>();
         // Asegurarse de que el botón está inicialmente habilitado o inhabilitado según el valor
-        if (mana.valor>=18)
+        if (mana.valor>=valorLimite)
         {
             myButton.interactable = true; // Habilitar el botón
         }

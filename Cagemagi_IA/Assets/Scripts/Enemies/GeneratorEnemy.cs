@@ -13,7 +13,7 @@ public class GeneratorEnemy : MonoBehaviour
     private void Start()
     {
         delay = delaygenerate;
-        delaygenerate = 15;
+        delaygenerate = 60;
     }
     private void Update() 
     {

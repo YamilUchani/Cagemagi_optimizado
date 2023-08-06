@@ -17,7 +17,7 @@ public class EnemyAttack : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= delayattack)
             {
-                lifeComponent.life -= damage;
+                 lifeComponent.life -= damage;
                 timer = 0f;
             }
         }

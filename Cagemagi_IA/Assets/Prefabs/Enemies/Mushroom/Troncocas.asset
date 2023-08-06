@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b6778f364ea9a43b2261f5f0fc32c9, type: 3}
   m_Name: Troncocas
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 919132149155446097, guid: 71499566ae3f9474c95aaaa15c2aa837, type: 3}
+  enemyPrefab: {fileID: 919132149155446097, guid: 0fd145a27831b9c4681d0ed0f6131720, type: 3}
   speed: 2
   torque: 45
   enemyTag: Enemigo
   destroyPosition: -24
-  rayLength: 0.501
+  rayLength: 0.51
   rayHeight: -0.5
   damage: 2
   delayattack: 2
   objectTag: Pasto
   limitTag: Limite
+  life: 40

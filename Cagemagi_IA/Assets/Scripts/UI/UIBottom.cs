@@ -11,6 +11,8 @@ public class UIBottom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public bool repeatContinuously = false;
     public bool isButtonHeld = false;
     public UIMana mana;
+    public int TypeTower;
+    public int manaCost;
     private void Update()
     {
         if (isButtonHeld)
@@ -18,6 +20,7 @@ public class UIBottom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             // Ejecutar la función en el objeto objetivo si el proceso se repite continuamente
             if (repeatContinuously)
             {
+                targetObject.TypeTower = TypeTower;
                 targetObject.SendMessage(targetFunctionName);
             }
         }
@@ -29,6 +32,7 @@ public class UIBottom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             // Ejecutar la función en el objeto objetivo una vez si el proceso no se repite continuamente
             if (!repeatContinuously)
             {
+                targetObject.TypeTower = TypeTower;
                 targetObject.SendMessage(targetFunctionName);
             }
     }
@@ -38,8 +42,9 @@ public class UIBottom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         Destroy(targetObject.selectTower);
         targetObject.selectTower = null;
         isButtonHeld = false;
-        if(mana.valor>=18)
+        if (mana.valor>=manaCost)
         {
+            targetObject.TypeTower = TypeTower;
             targetObject.SendMessage(targetFunctionCreate);
         }
     }

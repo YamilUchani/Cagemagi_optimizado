@@ -5,8 +5,7 @@ using UnityEngine.IO;
 
 public class GeneratorTower : MonoBehaviour
 {
-    
-    public TowerGenerator towerGenerator;
+    public List<TowerGenerator> towerGenerator = new List<TowerGenerator>();
     public Camera mainCamera; 
     public GameObject UImana;
     private Vector3 touchPosition;
@@ -14,6 +13,7 @@ public class GeneratorTower : MonoBehaviour
     public GameObject selectTower;
     public UIMana mana;
     private RaycastHit hit;
+    public int TypeTower;
     private void Start() 
     {
         mana = UImana.GetComponent<UIMana>();
@@ -32,7 +32,7 @@ public class GeneratorTower : MonoBehaviour
             {
                 if (selectTower == null) // Comprueba si el contenedor ya existe
                 {
-                    selectTower = Instantiate(towerGenerator.towerPrefab);
+                    selectTower = Instantiate(towerGenerator[TypeTower].towerPrefab);
                     
                 }
                 Component[] components = selectTower.GetComponentsInChildren<Component>();
@@ -55,17 +55,21 @@ public class GeneratorTower : MonoBehaviour
         {
             if (hitObject.CompareTag("Pasto"))
             {
-                towerGenerator.GenerateTower(hitObject);
-                
-                mana.valor -= towerGenerator.manaCost;
-                
+                if (hitObject.transform.childCount == 0)
+                {
+                    towerGenerator[TypeTower].GenerateTower(hitObject);
+                    mana.valor -= towerGenerator[TypeTower].manaCost;
+                }                
             }
             else if (hitObject.CompareTag("Vacio"))
             {
-                TerrainCreate regenerateTerrain = hitObject.GetComponent<TerrainCreate>();
-                regenerateTerrain.Regenerate();
-                towerGenerator.GenerateTower(hitObject);
-                Debug.Log("sdasdasdasdasd");
+                if(TypeTower == 0)
+                {
+                    TerrainCreate regenerateTerrain = hitObject.GetComponent<TerrainCreate>();
+                    regenerateTerrain.Regenerate();
+                    towerGenerator[TypeTower].GenerateTower(hitObject);
+                    mana.valor -= towerGenerator[TypeTower].manaCost;
+                }
             }
         }
     }

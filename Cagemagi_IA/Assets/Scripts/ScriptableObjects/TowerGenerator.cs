@@ -15,25 +15,69 @@ public class TowerGenerator : ScriptableObject
     public int typeTower;
     public int life;
     public int manaCost;
+    public Vector3 position;
+    public GameObject proyectile;
     public void GenerateTower(GameObject spawnedTerrain)
     {
-        if(typeTower == 1)
+        if(typeTower == 0)
         {
-            if (spawnedTerrain.transform.childCount == 0)
-            {
                 GameObject spawnedTower = Instantiate(towerPrefab);
                 spawnedTower.tag = towerTag;
                 int layer = LayerMask.NameToLayer(towerLayer);
                 spawnedTower.layer = layer;
                 spawnedTower.transform.SetParent(spawnedTerrain.transform);
-                spawnedTower.transform.localPosition = new Vector3(0f,5.5f,0f);
+                spawnedTower.transform.localPosition = new Vector3(0f,3.5f,0f);
                 var lifeComponent = spawnedTower.AddComponent<TowerLife>();
                 var regenerateComponent = spawnedTower.AddComponent<TowerRegenerate>();
                 var absorbComponent = spawnedTower.AddComponent<TowerAbsorb>();
+                BoxCollider boxCollider = spawnedTower.AddComponent<BoxCollider>();
+                boxCollider.isTrigger = true;
+                boxCollider.center = new Vector3(0f, 0f, 0f);
+                boxCollider.size = new Vector3(0.2f, 0.12f, 0.2f);
+                Rigidbody rigidbody = spawnedTower.AddComponent<Rigidbody>();
+                // Establecer las propiedades del Rigidbody
+                rigidbody.mass = 1f;
+                rigidbody.drag = 0f;
+                rigidbody.angularDrag = 0.05f;
+                rigidbody.useGravity = false;
+                rigidbody.isKinematic = false;
+                rigidbody.interpolation = RigidbodyInterpolation.None;
+                rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+                // Congelar la posición y rotación del Rigidbody
+                rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 lifeComponent.life = life;
                 regenerateComponent.delayregenerate = delayregenerate;
                 absorbComponent.delayabsorb = delayaction;
-            }
+        }
+        else if(typeTower == 1)
+        {
+                GameObject spawnedTower = Instantiate(towerPrefab);
+                spawnedTower.tag = towerTag;
+                int layer = LayerMask.NameToLayer(towerLayer);
+                spawnedTower.layer = layer;
+                spawnedTower.transform.SetParent(spawnedTerrain.transform);
+                spawnedTower.transform.localPosition = new Vector3(0f,3.5f,0f);
+                var attackComponent = spawnedTower.AddComponent<TowerAttack>();
+                var lifeComponent = spawnedTower.AddComponent<TowerLife>();
+                BoxCollider boxCollider = spawnedTower.AddComponent<BoxCollider>();
+                boxCollider.isTrigger = true;
+                boxCollider.center = new Vector3(0f, 0f, 0f);
+                boxCollider.size = new Vector3(0.4f, 0.0313f, 0.4f);
+                Rigidbody rigidbody = spawnedTower.AddComponent<Rigidbody>();
+                // Establecer las propiedades del Rigidbody
+                rigidbody.mass = 1f;
+                rigidbody.drag = 0f;
+                rigidbody.angularDrag = 0.05f;
+                rigidbody.useGravity = false;
+                rigidbody.isKinematic = false;
+                rigidbody.interpolation = RigidbodyInterpolation.None;
+                rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                lifeComponent.life = life;
+                attackComponent.prefabAtaque = proyectile;
+                attackComponent.position = position;
+                attackComponent.delayattack = delayaction;
         }
     }
 }

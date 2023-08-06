@@ -7,7 +7,7 @@ public class UIMana : MonoBehaviour
     public TMP_Text texto;
     void Start()
     {
-        valor=18;
+        valor=36;
         texto = GetComponent<TMP_Text>();
         texto.SetText(valor.ToString());
     }

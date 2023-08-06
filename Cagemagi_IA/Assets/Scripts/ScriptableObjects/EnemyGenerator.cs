@@ -17,7 +17,7 @@ public class EnemyGenerator : ScriptableObject
     public int delayattack;
     public string objectTag;
     public string limitTag;
-
+    public int life;
     public void Spawn(Vector3 spawnPosition)
     {
         if (spawnedContainer == null) // Comprueba si el contenedor ya existe
@@ -28,7 +28,6 @@ public class EnemyGenerator : ScriptableObject
         GameObject spawnedModel = new GameObject("EnemyModel");
         spawnedModel.tag = enemyTag;
         GameObject spawnedObject = Instantiate(enemyPrefab);
-        spawnedObject.tag = enemyTag;
         spawnedModel.transform.position = spawnPosition;
         spawnedModel.transform.SetParent(spawnedContainer.transform);
         spawnedObject.transform.SetParent(spawnedModel.transform);
@@ -37,9 +36,20 @@ public class EnemyGenerator : ScriptableObject
         var moverComponent = spawnedModel.AddComponent<EnemyMover>();
         var detectorComponent = spawnedModel.AddComponent<EnemyCollision>();
         var attackComponent = spawnedModel.AddComponent<EnemyAttack>();
-        CapsuleCollider collider = spawnedObject.AddComponent<CapsuleCollider>();
-        collider.height = 1.15f;
-        collider.radius = 0.5f;
+        var lifeComponent = spawnedModel.AddComponent<EnemyLife>();
+        CapsuleCollider collider = spawnedModel.AddComponent<CapsuleCollider>();
+        Rigidbody rigidbody = spawnedModel.AddComponent<Rigidbody>();
+        // Establecer las propiedades del Rigidbody
+        rigidbody.mass = 1f;
+        rigidbody.drag = 0f;
+        rigidbody.angularDrag = 0.05f;
+        rigidbody.useGravity = false;
+        rigidbody.isKinematic = true;
+        rigidbody.interpolation = RigidbodyInterpolation.None;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        collider.isTrigger = false;
+        collider.height = 2f;
+        collider.radius = 0.45f;
         collider.center = new Vector3(0f, 0f, 0f);
         moverComponent.speed = speed;
         moverComponent.torque = torque;
@@ -54,5 +64,6 @@ public class EnemyGenerator : ScriptableObject
         attackComponent.delayattack = delayattack;
         attackComponent.col = detectorComponent;
         attackComponent.model = spawnedObject;
+        lifeComponent.life = life;
     }
 }

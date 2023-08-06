@@ -14,7 +14,7 @@ public class EnemyCollision : MonoBehaviour
     private bool collision;
     public GameObject terrain;
     private GameObject saveterrain;
-    void Update()
+    void FixedUpdate()
     {
         if(mov.directionMove.x == 1)
         {

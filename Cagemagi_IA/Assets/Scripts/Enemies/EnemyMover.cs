@@ -19,17 +19,14 @@ public class EnemyMover : MonoBehaviour
         speedReal = speed;
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position += directionMove * speed * Time.deltaTime;
-        
-        if (transform.position.z <= destroyPosition)
-            Destroy(gameObject);
         
         if (detectedRotated)
         {
             speed=0;
-            
+                 
             Rotate(rotationSpeed * torque);
         }
         if (speed == 0)
