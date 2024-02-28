@@ -5,14 +5,11 @@ public class UIScale : MonoBehaviour
     public float minAspectRatio; // Aspect ratio límite
     public Vector3 minPosition;  
     public Vector3 minRotation;
-    public float minCameraSize;
     public float mediumAspectRatio; // Aspect ratio límite
     public Vector3 mediumPosition;
     public Vector3 mediumRotation;
-    public float mediumCameraSize;
     public Vector3 maxPosition;
     public Vector3 maxRotation;
-    public float maxCameraSize;
 
 
 
@@ -38,20 +35,17 @@ public class UIScale : MonoBehaviour
     {
         mainCamera.transform.position = minPosition;
         mainCamera.transform.rotation = Quaternion.Euler(minRotation);
-        mainCamera.orthographicSize = minCameraSize;
     }
 
     private void mediumCameraPosition()
     {
         mainCamera.transform.position = mediumPosition;
         mainCamera.transform.rotation = Quaternion.Euler(mediumRotation);
-        mainCamera.orthographicSize = mediumCameraSize;
     }
 
     private void maxCameraPosition()
     {
         mainCamera.transform.position = maxPosition;
         mainCamera.transform.rotation = Quaternion.Euler(maxRotation);
-        mainCamera.orthographicSize = maxCameraSize;
     }
 }

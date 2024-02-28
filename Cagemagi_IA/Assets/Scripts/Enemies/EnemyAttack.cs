@@ -11,14 +11,17 @@ public class EnemyAttack : MonoBehaviour
     public GameObject model;
     private void Update() 
     {
-        if(col.terrain != null &&  col.mov.collision)
+       if(col.terrain != null && col.mov.collision)
         {
-            TerrainLife lifeComponent = col.terrain.GetComponent<TerrainLife>();   
-            timer += Time.deltaTime;
-            if (timer >= delayattack)
+            if(!col.terrain.CompareTag("Vacio"))
             {
-                 lifeComponent.life -= damage;
-                timer = 0f;
+                TerrainLife lifeComponent = col.terrain.GetComponent<TerrainLife>();
+                timer += Time.deltaTime;
+                if (timer >= delayattack)
+                {
+                    lifeComponent.life -= damage;
+                    timer = 0f;
+                }
             }
         }
     }

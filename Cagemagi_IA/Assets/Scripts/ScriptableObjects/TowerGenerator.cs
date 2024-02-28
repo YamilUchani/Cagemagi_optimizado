@@ -26,7 +26,7 @@ public class TowerGenerator : ScriptableObject
                 int layer = LayerMask.NameToLayer(towerLayer);
                 spawnedTower.layer = layer;
                 spawnedTower.transform.SetParent(spawnedTerrain.transform);
-                spawnedTower.transform.localPosition = new Vector3(0f,3.5f,0f);
+                spawnedTower.transform.localPosition = new Vector3(0f,0.8f,0f);
                 var lifeComponent = spawnedTower.AddComponent<TowerLife>();
                 var regenerateComponent = spawnedTower.AddComponent<TowerRegenerate>();
                 var absorbComponent = spawnedTower.AddComponent<TowerAbsorb>();
@@ -57,7 +57,7 @@ public class TowerGenerator : ScriptableObject
                 int layer = LayerMask.NameToLayer(towerLayer);
                 spawnedTower.layer = layer;
                 spawnedTower.transform.SetParent(spawnedTerrain.transform);
-                spawnedTower.transform.localPosition = new Vector3(0f,3.5f,0f);
+                spawnedTower.transform.localPosition = new Vector3(0f,0.8f,0f);
                 var attackComponent = spawnedTower.AddComponent<TowerAttack>();
                 var lifeComponent = spawnedTower.AddComponent<TowerLife>();
                 BoxCollider boxCollider = spawnedTower.AddComponent<BoxCollider>();
