@@ -1,0 +1,4 @@
+repository "MagicalPunk@Yamiluchani@cloud"
+  path "/"
+    br "/main"
+    co "/main"
