@@ -40,8 +40,11 @@ public void GenerateGrid()
                 GameObject spawnedTerrain = Instantiate(cubePrefab, pos, Quaternion.identity);
                 spawnedTerrain.transform.SetParent(terrainContainer.transform);
                 spawnedTerrain.tag = terrainTag;
+                var collComponent = spawnedTerrain.AddComponent<BoxCollider>();
                 var lifeComponent = spawnedTerrain.AddComponent<TerrainLife>();
                 var manaComponent = spawnedTerrain.AddComponent<TerrainMana>();
+                collComponent.size = new Vector3(1f, 1f, 1f);
+                collComponent.center = new Vector3(0f, 0f, 0f);
                 lifeComponent.life = life;
                 lifeComponent.voidMaterial = voidMaterial;
                 lifeComponent.terrainTag = terrainTag;
@@ -54,16 +57,17 @@ public void GenerateGrid()
             {
                 GameObject spawnedTerrain = Instantiate(cubePrefab, pos, Quaternion.identity);
                 spawnedTerrain.transform.SetParent(terrainContainer.transform);
-                Renderer renderer = spawnedTerrain.GetComponent<Renderer>();
-                var createComponent = spawnedTerrain.AddComponent<TerrainCreate>();
-                Collider collider = spawnedTerrain.GetComponent<Collider>();
-                collider.isTrigger = true;
-                createComponent.terrainTag = terrainTag;
-                renderer.material = voidMaterial;
-                createComponent.pastoMaterial = pastoMaterial;
-                createComponent.life = life; 
-                createComponent.voidMaterial = voidMaterial; 
-                createComponent.manaCount = manaCount;
+                foreach (Transform childTransform in spawnedTerrain.transform) childTransform.gameObject.SetActive(false);
+                var collComponent = spawnedTerrain.AddComponent<BoxCollider>();
+                var creaComponent = spawnedTerrain.AddComponent<TerrainCreate>();
+                collComponent.size = new Vector3(1f, 1f, 1f);
+                collComponent.center = new Vector3(0f, 0f, 0f);
+                collComponent.isTrigger = true;
+                creaComponent.terrainTag = terrainTag;
+                creaComponent.pastoMaterial = pastoMaterial;
+                creaComponent.life = life; 
+                creaComponent.voidMaterial = voidMaterial; 
+                creaComponent.manaCount = manaCount;
                 spawnedTerrain.tag = "Vacio";
             }
         }

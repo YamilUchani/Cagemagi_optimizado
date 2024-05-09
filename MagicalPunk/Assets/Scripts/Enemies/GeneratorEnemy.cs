@@ -10,7 +10,7 @@ public class GeneratorEnemy : MonoBehaviour
     private float delay;
     public GameObject time;
     private Vector3 spawnpos;
-    private float delayinitial = 60;
+    private float delayinitial = 30;
     private void Start()
     {
         delay = delaygenerate;

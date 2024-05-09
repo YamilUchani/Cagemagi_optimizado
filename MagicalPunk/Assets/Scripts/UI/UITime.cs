@@ -10,7 +10,7 @@ public class UITime : MonoBehaviour
     public GameObject imag;
     void Start() 
     {
-        valor = 60;
+        valor = 30;
     }
     void Update()
     {

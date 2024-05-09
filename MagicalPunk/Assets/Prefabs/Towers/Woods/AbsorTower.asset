@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c9715b8a87bae4799a436d7c050644, type: 3}
   m_Name: AbsorTower
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 617526974513747457, guid: 8aca75be7736613438896bd01ebc7b72, type: 3}
+  towerPrefab: {fileID: 617526974513747457, guid: 8aca75be7736613438896bd01ebc7b72,
+    type: 3}
   towerTag: Torre
   towerLayer: IgnoreTouch
   delayregenerate: 10
-  delayaction: 15
+  delayaction: 10
   typeTower: 0
   life: 20
   manaCost: 36
