@@ -40,15 +40,13 @@ public class TerrainCreate : MonoBehaviour
     public void Regenerate()
     {
         gameObject.tag = terrainTag;
-        Renderer renderer = GetComponent<Renderer>();
         Collider collider = gameObject.GetComponent<Collider>();
         var lifeComponent = gameObject.AddComponent<TerrainLife>();
         var manaComponent = gameObject.AddComponent<TerrainMana>();
         manaComponent.manaCount = manaCount;
-        renderer.material = pastoMaterial;
+        foreach (Transform childTransform in gameObject.transform) childTransform.gameObject.SetActive(true);
         collider.isTrigger = false;
         lifeComponent.life = life;
-        lifeComponent.voidMaterial = voidMaterial;
     }
 
 }

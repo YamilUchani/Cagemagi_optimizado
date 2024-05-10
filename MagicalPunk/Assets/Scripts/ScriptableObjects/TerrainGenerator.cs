@@ -8,8 +8,6 @@ public class TerrainGenerator : ScriptableObject
 public int manaCount;
 private GameObject terrainContainer;
 public GameObject cubePrefab; // Arrastra un prefab de cubo a este campo en el Inspector
-public Material voidMaterial;
-public Material pastoMaterial;
 public UIMana UImana;
 public string terrainTag;
 public int gridWidth = 18;
@@ -46,9 +44,7 @@ public void GenerateGrid()
                 collComponent.size = new Vector3(1f, 1f, 1f);
                 collComponent.center = new Vector3(0f, 0f, 0f);
                 lifeComponent.life = life;
-                lifeComponent.voidMaterial = voidMaterial;
                 lifeComponent.terrainTag = terrainTag;
-                lifeComponent.pastoMaterial = pastoMaterial;
                 lifeComponent.manaCount = manaCount;
                 manaComponent.manaCount = manaCount;
 
@@ -64,9 +60,7 @@ public void GenerateGrid()
                 collComponent.center = new Vector3(0f, 0f, 0f);
                 collComponent.isTrigger = true;
                 creaComponent.terrainTag = terrainTag;
-                creaComponent.pastoMaterial = pastoMaterial;
                 creaComponent.life = life; 
-                creaComponent.voidMaterial = voidMaterial; 
                 creaComponent.manaCount = manaCount;
                 spawnedTerrain.tag = "Vacio";
             }

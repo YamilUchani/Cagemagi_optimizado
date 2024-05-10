@@ -53,13 +53,14 @@ public class GeneratorTower : MonoBehaviour
         UIMana mana = UImana.GetComponent<UIMana>();
         if (hit.collider != null)
         {
+            
             if (hitObject.CompareTag("Pasto"))
             {
-                if (hitObject.transform.childCount == 0)
+                if (FindChildWithTag(hitObject.transform, "Torre") == null)
                 {
                     towerGenerator[TypeTower].GenerateTower(hitObject);
                     mana.valor -= towerGenerator[TypeTower].manaCost;
-                }                
+                }                 
             }
             else if (hitObject.CompareTag("Vacio"))
             {
@@ -72,5 +73,17 @@ public class GeneratorTower : MonoBehaviour
                 }
             }
         }
+    }
+        // Método para buscar un objeto hijo por etiqueta
+    Transform FindChildWithTag(Transform parent, string tag)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.CompareTag(tag))
+            {
+                return child;
+            }
+        }
+        return null;
     }
 }

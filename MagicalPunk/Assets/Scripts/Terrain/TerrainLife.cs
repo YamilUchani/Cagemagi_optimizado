@@ -7,14 +7,12 @@ public class TerrainLife : MonoBehaviour
     public int manaCount;
     public int life;
     public int lifeTotal;
-    public Material voidMaterial;
     public string terrainTag;
-    public Material pastoMaterial;
     public GameObject towerDetected;
     private bool hasExecuted = false;
     private void Update()
     {
-        if (transform.childCount == 1)
+        if (transform.childCount > 12)
         {
             if (!hasExecuted)
             {
@@ -42,16 +40,13 @@ public class TerrainLife : MonoBehaviour
             if (life<=0)
             {
                 this.gameObject.tag = "Vacio";
-                Renderer renderer = gameObject.GetComponent<Renderer>();
                 var createComponent = gameObject.AddComponent<TerrainCreate>();
                 Collider collider = gameObject.GetComponent<Collider>();
+                foreach (Transform childTransform in gameObject.transform) childTransform.gameObject.SetActive(false);
                 createComponent.manaCount = manaCount;
                 collider.isTrigger = true;
                 createComponent.terrainTag = terrainTag;
-                renderer.material = voidMaterial;
-                createComponent.pastoMaterial = pastoMaterial;
                 createComponent.life = 20; 
-                createComponent.voidMaterial = voidMaterial; 
                 TerrainLife terrainLife = GetComponent<TerrainLife>();
                 Destroy(terrainLife);
             }

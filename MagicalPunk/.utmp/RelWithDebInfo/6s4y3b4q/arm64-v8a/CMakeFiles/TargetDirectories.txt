@@ -1,0 +1,5 @@
+E:/Repositorios/Cagemagi_optimizado/MagicalPunk/.utmp/RelWithDebInfo/6s4y3b4q/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/Repositorios/Cagemagi_optimizado/MagicalPunk/.utmp/RelWithDebInfo/6s4y3b4q/arm64-v8a/CMakeFiles/rebuild_cache.dir
+E:/Repositorios/Cagemagi_optimizado/MagicalPunk/.utmp/RelWithDebInfo/6s4y3b4q/arm64-v8a/GameActivity/CMakeFiles/game.dir
+E:/Repositorios/Cagemagi_optimizado/MagicalPunk/.utmp/RelWithDebInfo/6s4y3b4q/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+E:/Repositorios/Cagemagi_optimizado/MagicalPunk/.utmp/RelWithDebInfo/6s4y3b4q/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
