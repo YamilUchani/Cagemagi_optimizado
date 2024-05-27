@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RevivingEnemyAttack : MonoBehaviour
+{
+    public int damage;
+    public int delayAttack;
+    public int maxRevives = 1;
+    private int revivesLeft;
+    private float timer;
+    public GameObject model;
+    private TerrainLife lifeComponent;
+
+    private void Start()
+    {
+        revivesLeft = maxRevives;
+    }
+
+    private void Update()
+    {
+        if (lifeComponent == null)
+            return;
+
+        if (lifeComponent.life <= 0)
+        {
+            if (revivesLeft > 0)
+            {
+                ReviveEnemy();
+            }
+            else
+            {
+                KillEnemy();
+            }
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= delayAttack)
+        {
+            Attack();
+            timer = 0f;
+        }
+    }
+
+    private void ReviveEnemy()
+    {
+        revivesLeft--;
+        lifeComponent.MaxLife *= 0.75f; 
+        lifeComponent.ResetLife(); 
+        damage *= 2; 
+        delayAttack /= 2; 
+    }
+
+    private void KillEnemy()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void Attack()
+    {
+        lifeComponent.TakeDamage(damage);
+    }
+}
